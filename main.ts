@@ -26,11 +26,11 @@ let mySprite2: Sprite = null
 let myhitbox: Sprite = null
 let mySprite: Sprite = null
 let playerid = 0
-let req = ""
-let datareq = ""
-let answer = ""
-let connection = false
 let gottenanswer = false
+let connection = false
+let answer = ""
+let datareq = ""
+let req = ""
 playerid = 1
 let testmsg = "tick"
 const ws = new WebSocket("wss://weboscketserver2.onrender.com")
@@ -131,6 +131,7 @@ mySprite2 = sprites.create(img`
 scene.cameraFollowSprite(mySprite)
 CollisionHandler.handleSolidCollision(mySprite, SpriteKind.Player)
 CollisionHandler.handleSolidCollision(mySprite2, SpriteKind.Player)
+console.log("")
 game.onUpdate(function () {
     if (playerid == 1) {
         myhitbox.setPosition(mySprite.x, mySprite.y)
@@ -148,35 +149,15 @@ game.onUpdate(function () {
         myhitbox.setPosition(mySprite2.x, mySprite2.y)
     }
     if (playerid == 1 && connection) {
-        datareq = "n/mmop/player1/x>" + mySprite.x
+        datareq = "n/mmop/player1/x>" + "x" + mySprite.x
         ws.send(datareq)
-datareq = "n/mmop/player1/y>" + mySprite.y
+datareq = "n/mmop/player1/y>" + "y" + mySprite.y
         ws.send(datareq)
-datareq = "/mmop/player2/x"
-        gottenanswer = false
-        ws.send(datareq)
-pauseUntil(() => gottenanswer)
-        p2x = parseInt(answer)
-        datareq = "/mmop/player2/y"
-        gottenanswer = false
-        ws.send(datareq)
-pauseUntil(() => gottenanswer)
-        p2y = parseInt(answer)
     } else if (connection && playerid == 2) {
-        datareq = "n/mmop/player2/x>" + mySprite2.x
+        datareq = "n/mmop/player2/x>" + "x" + mySprite2.x
         ws.send(datareq)
-datareq = "n/mmop/player2/y>" + mySprite2.y
+datareq = "n/mmop/player2/y>" + "y" + mySprite2.y
         ws.send(datareq)
-datareq = "/mmop/player1/x"
-        gottenanswer = false
-        ws.send(datareq)
-pauseUntil(() => gottenanswer)
-        p2x2 = parseInt(answer)
-        datareq = "/mmop/player1/y"
-        gottenanswer = false
-        ws.send(datareq)
-pauseUntil(() => gottenanswer)
-        p2y2 = parseInt(answer)
     }
 })
 game.onUpdate(function () {
@@ -184,5 +165,46 @@ game.onUpdate(function () {
         mySprite2.setPosition(p2x, p2y)
     } else {
         mySprite.setPosition(p2x2, p2y2)
+    }
+})
+game.onUpdateInterval(200, function () {
+    if (connection) {
+        if (playerid == 1) {
+            datareq = "/mmop/player2/x"
+            gottenanswer = false
+            ws.send(datareq)
+pauseUntil(() => gottenanswer)
+            p2x = parseInt(answer)
+            datareq = "/mmop/player2/y"
+            gottenanswer = false
+            ws.send(datareq)
+pauseUntil(() => gottenanswer)
+            p2y = parseInt(answer)
+        } else {
+            datareq = "/mmop/player1/x"
+            gottenanswer = false
+            ws.send(datareq)
+pauseUntil(() => gottenanswer)
+            p2x2 = parseInt(answer)
+            datareq = "/mmop/player1/y"
+            gottenanswer = false
+            ws.send(datareq)
+pauseUntil(() => gottenanswer)
+            p2y2 = parseInt(answer)
+        }
+    }
+    if (answer.charAt(0) == "x") {
+        if (playerid == 1) {
+            p2x = parseFloat(answer.substr(1, 2))
+        } else {
+            p2x2 = parseFloat(answer.substr(1, 2))
+        }
+        if (answer.charAt(0) == "y") {
+            if (playerid == 1) {
+                p2y = parseFloat(answer.substr(1, 2))
+            } else {
+                p2y2 = parseFloat(answer.substr(1, 2))
+            }
+        }
     }
 })
