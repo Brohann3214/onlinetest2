@@ -141,10 +141,12 @@ game.onUpdate(function () {
         datareq = "n/mmop/player1/y>" + mySprite.y
         ws.send(datareq)
         datareq = "/mmop/player2/x"
+        gottenanswer = false
         ws.send(datareq)
         pauseUntil(() => gottenanswer)
         let p2x = parseInt(answer)
         datareq = "/mmop/player2/y"
+        gottenanswer = false
         ws.send(datareq)
         pauseUntil(() => gottenanswer)
         let p2y = parseInt(answer)
@@ -155,10 +157,12 @@ game.onUpdate(function () {
         datareq = "n/mmop/player2/y>" + mySprite.y
         ws.send(datareq)
         datareq = "/mmop/player1/x"
+        gottenanswer = false
         ws.send(datareq)
         pauseUntil(() => gottenanswer)
         let p2x = parseInt(answer)
         datareq = "/mmop/player1/y"
+        gottenanswer = false
         ws.send(datareq)
         pauseUntil(() => gottenanswer)
         let p2y = parseInt(answer)
