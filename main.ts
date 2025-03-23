@@ -46,7 +46,7 @@ control.runInParallel(function () {
 
 
 })
-game.consoleOverlay.setVisible(true)
+//game.consoleOverlay.setVisible(true)
 scene.setBackgroundColor(13)
 tiles.setCurrentTilemap(tilemap`level`)
 mySprite = sprites.create(img`
