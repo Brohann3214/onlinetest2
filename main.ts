@@ -26,11 +26,11 @@ let mySprite2: Sprite = null
 let myhitbox: Sprite = null
 let mySprite: Sprite = null
 let playerid = 0
-let gottenanswer = false
-let connection = false
-let answer = ""
-let datareq = ""
 let req = ""
+let datareq = ""
+let answer = ""
+let connection = false
+let gottenanswer = false
 playerid = 1
 let testmsg = "tick"
 const ws = new WebSocket("wss://weboscketserver2.onrender.com")
@@ -131,7 +131,6 @@ mySprite2 = sprites.create(img`
 scene.cameraFollowSprite(mySprite)
 CollisionHandler.handleSolidCollision(mySprite, SpriteKind.Player)
 CollisionHandler.handleSolidCollision(mySprite2, SpriteKind.Player)
-console.log("")
 game.onUpdate(function () {
     if (playerid == 1) {
         myhitbox.setPosition(mySprite.x, mySprite.y)
@@ -207,4 +206,5 @@ pauseUntil(() => gottenanswer)
             }
         }
     }
+    console.logValue("x", p2x)
 })
