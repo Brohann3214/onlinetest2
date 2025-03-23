@@ -26,11 +26,11 @@ let mySprite2: Sprite = null
 let myhitbox: Sprite = null
 let mySprite: Sprite = null
 let playerid = 0
-let req = ""
-let datareq = ""
-let answer = ''
-let connection = false
 let gottenanswer = false
+let connection = false
+let answer = ''
+let datareq = ""
+let req = ""
 playerid = 1
 let testmsg = "tick"
 const ws = new WebSocket("wss://weboscketserver2.onrender.com")
@@ -158,7 +158,6 @@ pauseUntil(() => gottenanswer)
         ws.send(datareq)
 pauseUntil(() => gottenanswer)
         p2y = parseInt(answer)
-        mySprite2.setPosition(p2x, p2y)
     } else if (connection) {
         datareq = "n/mmop/player2/x>" + mySprite.x
         ws.send(datareq)
@@ -174,9 +173,12 @@ pauseUntil(() => gottenanswer)
         ws.send(datareq)
 pauseUntil(() => gottenanswer)
         p2y2 = parseInt(answer)
-        mySprite.setPosition(p2x2, p2y2)
     }
 })
 game.onUpdate(function () {
-	
+    if (playerid == 1) {
+        mySprite2.setPosition(p2x, p2y)
+    } else {
+        mySprite.setPosition(p2x2, p2y2)
+    }
 })
