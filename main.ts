@@ -2,8 +2,14 @@ namespace SpriteKind {
     export const hitbox = SpriteKind.create()
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (mySprite.isHittingTile(CollisionDirection.Bottom) || myhitbox.overlapsWith(mySprite2)) {
-        mySprite.vy = -170
+    if (playerid ==  1){
+        if (mySprite.isHittingTile(CollisionDirection.Bottom) || myhitbox.overlapsWith(mySprite2)) {
+            mySprite.vy = -170
+        }
+    } else {
+        if (mySprite2.isHittingTile(CollisionDirection.Bottom) || myhitbox.overlapsWith(mySprite)) {
+            mySprite2.vy = -170
+        }
     }
 })
 let mySprite2: Sprite = null
@@ -25,6 +31,7 @@ control.runInParallel(function () {
     ws.onmessage = (msg) => {
         gottenanswer = true
         connection = true
+        console.log("connected")
         const data = msg.data;
         console.log(`[Recieved] ${data}`)
         answer = `${data}`
@@ -46,7 +53,7 @@ control.runInParallel(function () {
 
 
 })
-//game.consoleOverlay.setVisible(true)
+
 scene.setBackgroundColor(13)
 tiles.setCurrentTilemap(tilemap`level`)
 mySprite = sprites.create(img`
