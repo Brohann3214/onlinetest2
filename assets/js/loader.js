@@ -1,22 +1,7 @@
-var meta = undefined;
 var channelHandlers = {}
 
 function addSimMessageHandler(channel, handler) {
     channelHandlers[channel] = handler;
-}
-
-function simPostMessage(msg) {
-    const frame = document.getElementById("simframe");
-    if (frame)
-        frame.contentWindow.postMessage(msg, meta.simUrl);
-}
-
-function uint8ArrayToString(input) {
-    let len = input.length;
-    let res = ""
-    for (let i = 0; i < len; ++i)
-        res += String.fromCharCode(input[i]);
-    return res;
 }
 
 function makeCodeRun(options) {
@@ -25,6 +10,7 @@ function makeCodeRun(options) {
     var simState = {}
     var simStateChanged = false
     var started = false;
+    var meta = undefined;
 
     // hide scrollbar
     window.scrollTo(0, 1);
@@ -77,12 +63,12 @@ function makeCodeRun(options) {
             },
             id: "green-" + Math.random()
         }
-        simPostMessage(runMsg);
+        postMessage(runMsg);
     }
 
     function stopSim() {
         setState("stopped");
-        simPostMessage({
+        postMessage({
             type: "stop"
         });
         started = false;
@@ -115,7 +101,9 @@ function makeCodeRun(options) {
             if (handler) {
                 try {
                     const buf = d.data;
-                    handler(buf);
+                    const str = uint8ArrayToString(buf);
+                    const data = JSON.parse(str)
+                    handler(data);
                 } catch (e) {
                     console.log(`invalid simmessage`)
                     console.log(e)
@@ -124,12 +112,25 @@ function makeCodeRun(options) {
         }            
     }, false);
 
-    // helpers         
+    // helpers
+    function uint8ArrayToString(input) {
+        let len = input.length;
+        let res = ""
+        for (let i = 0; i < len; ++i)
+            res += String.fromCharCode(input[i]);
+        return res;
+    }            
 
     function setState(st) {
         var r = document.getElementById("root");
         if (r)
             r.setAttribute("data-state", st);
+    }
+
+    function postMessage(msg) {
+        const frame = document.getElementById("simframe");
+        if (frame)
+            frame.contentWindow.postMessage(msg, meta.simUrl);
     }
 
     function sendReq(url, cb) {
