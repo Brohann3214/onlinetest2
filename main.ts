@@ -26,11 +26,11 @@ let mySprite2: Sprite = null
 let myhitbox: Sprite = null
 let mySprite: Sprite = null
 let playerid = 0
-let gottenanswer = false
-let connection = false
-let answer = ''
-let datareq = ""
 let req = ""
+let datareq = ""
+let answer = ""
+let connection = false
+let gottenanswer = false
 playerid = 1
 let testmsg = "tick"
 const ws = new WebSocket("wss://weboscketserver2.onrender.com")
@@ -178,7 +178,6 @@ pauseUntil(() => gottenanswer)
 pauseUntil(() => gottenanswer)
         p2y2 = parseInt(answer)
     }
-    console.logValue("p2x", p2x)
 })
 game.onUpdate(function () {
     if (playerid == 1) {
