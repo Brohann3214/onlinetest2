@@ -26,11 +26,11 @@ let mySprite2: Sprite = null
 let myhitbox: Sprite = null
 let mySprite: Sprite = null
 let playerid = 0
-let gottenanswer = false
-let connection = false
-let answer = ''
-let datareq = ""
 let req = ""
+let datareq = ""
+let answer = ''
+let connection = false
+let gottenanswer = false
 playerid = 1
 let testmsg = "tick"
 const ws = new WebSocket("wss://weboscketserver2.onrender.com")
@@ -160,9 +160,9 @@ pauseUntil(() => gottenanswer)
 pauseUntil(() => gottenanswer)
         p2y = parseInt(answer)
     } else if (connection && playerid == 2) {
-        datareq = "n/mmop/player2/x>" + mySprite.x
+        datareq = "n/mmop/player2/x>" + mySprite2.x
         ws.send(datareq)
-datareq = "n/mmop/player2/y>" + mySprite.y
+datareq = "n/mmop/player2/y>" + mySprite2.y
         ws.send(datareq)
 datareq = "/mmop/player1/x"
         gottenanswer = false
