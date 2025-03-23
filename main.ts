@@ -127,6 +127,7 @@ mySprite2 = sprites.create(img`
     `, SpriteKind.Player)
 scene.cameraFollowSprite(mySprite)
 CollisionHandler.handleSolidCollision(mySprite, SpriteKind.Player)
+CollisionHandler.handleSolidCollision(mySprite2, SpriteKind.Player)
 game.onUpdate(function () {
     if (playerid == 1) {
         myhitbox.setPosition(mySprite.x, mySprite.y)
@@ -158,7 +159,7 @@ pauseUntil(() => gottenanswer)
         ws.send(datareq)
 pauseUntil(() => gottenanswer)
         p2y = parseInt(answer)
-    } else if (connection) {
+    } else if (connection && playerid == 2) {
         datareq = "n/mmop/player2/x>" + mySprite.x
         ws.send(datareq)
 datareq = "n/mmop/player2/y>" + mySprite.y
