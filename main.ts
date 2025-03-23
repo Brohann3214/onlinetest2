@@ -26,11 +26,11 @@ let mySprite2: Sprite = null
 let myhitbox: Sprite = null
 let mySprite: Sprite = null
 let playerid = 0
-let req = ""
-let datareq = ""
-let answer = ''
-let connection = false
 let gottenanswer = false
+let connection = false
+let answer = ''
+let datareq = ""
+let req = ""
 playerid = 1
 let testmsg = "tick"
 const ws = new WebSocket("wss://weboscketserver2.onrender.com")
@@ -46,6 +46,9 @@ control.runInParallel(function () {
         const data = msg.data;
         console.log(`[Recieved] ${data}`)
         answer = `${data}`
+        if (parseInt(answer) < 10000){
+            
+        }
     }
     ws.onopen = () => {
 
@@ -144,7 +147,7 @@ game.onUpdate(function () {
         scene.cameraFollowSprite(mySprite2)
         myhitbox.setPosition(mySprite2.x, mySprite2.y)
     }
-    if (playerid == 1 && gottenanswer) {
+    if (playerid == 1 && connection) {
         datareq = "n/mmop/player1/x>" + mySprite.x
         ws.send(datareq)
 datareq = "n/mmop/player1/y>" + mySprite.y
@@ -175,6 +178,7 @@ pauseUntil(() => gottenanswer)
 pauseUntil(() => gottenanswer)
         p2y2 = parseInt(answer)
     }
+    console.logValue("p2x", p2x)
 })
 game.onUpdate(function () {
     if (playerid == 1) {
