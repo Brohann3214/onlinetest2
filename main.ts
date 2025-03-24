@@ -23,7 +23,7 @@ let myhitbox: Sprite = null
 let mySprite: Sprite = null
 let req = ""
 let datareq = ""
-let answer = ""
+let answer = ''
 let connection = false
 let gottenanswer = false
 let playerid = 0
@@ -47,6 +47,7 @@ control.runInParallel(function () {
         console.log(`[Recieved] ${data}`)
         answer = `${data}`
         if (answer.charAt(0) == "x") {
+            console.log("THIS IS IT IT WORKS KINDA")
             if (playerid == 1) {
                 p2x = parseFloat(answer.substr(1, 5))
             } else {
