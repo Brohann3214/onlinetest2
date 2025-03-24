@@ -18,19 +18,19 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     playerid = 1
 })
-let p2y2 = 0
-let p2x2 = 0
-let p2y = 0
-let p2x = 0
 let mySprite2: Sprite = null
 let myhitbox: Sprite = null
 let mySprite: Sprite = null
-let playerid = 0
-let gottenanswer = false
-let connection = false
-let answer = ""
-let datareq = ""
 let req = ""
+let datareq = ""
+let answer = ""
+let connection = false
+let gottenanswer = false
+let playerid = 0
+let p2x = 0
+let p2y = 0
+let p2x2 = 0
+let p2y2 = 0
 playerid = 1
 let testmsg = "tick"
 const ws = new WebSocket("wss://weboscketserver2.onrender.com")
@@ -178,6 +178,7 @@ game.onUpdate(function () {
     }
 })
 game.onUpdateInterval(200, function () {
+    info.setScore(p2x)
     if (connection) {
         if (playerid == 1) {
             datareq = "/mmop/player2/x"
@@ -195,5 +196,4 @@ datareq = "/mmop/player1/y"
             ws.send(datareq)
         }
     }
-    
 })
