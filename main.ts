@@ -46,8 +46,19 @@ control.runInParallel(function () {
         const data = msg.data;
         console.log(`[Recieved] ${data}`)
         answer = `${data}`
-        if (parseInt(answer) < 10000){
-            
+        if (answer.charAt(0) == "x") {
+            if (playerid == 1) {
+                p2x = parseFloat(answer.substr(1, 5))
+            } else {
+                p2x2 = parseFloat(answer.substr(1, 5))
+            }
+        }
+        if (answer.charAt(0) == "y") {
+            if (playerid == 1) {
+                p2y = parseFloat(answer.substr(1, 5))
+            } else {
+                p2y2 = parseFloat(answer.substr(1, 5))
+            }
         }
     }
     ws.onopen = () => {
@@ -184,18 +195,5 @@ datareq = "/mmop/player1/y"
             ws.send(datareq)
         }
     }
-    if (answer.charAt(0) == "x") {
-        if (playerid == 1) {
-            p2x = parseFloat(answer.substr(1, 5))
-        } else {
-            p2x2 = parseFloat(answer.substr(1, 5))
-        }
-    if (answer.charAt(0) == "y") {
-        if (playerid == 1) {
-                p2y = parseFloat(answer.substr(1, 5))
-        } else {
-            p2y2 = parseFloat(answer.substr(1, 5))
-        }
-    }
-    }
+    
 })
