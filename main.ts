@@ -26,11 +26,11 @@ let mySprite2: Sprite = null
 let myhitbox: Sprite = null
 let mySprite: Sprite = null
 let playerid = 0
-let req = ""
-let datareq = ""
-let answer = ""
-let connection = false
 let gottenanswer = false
+let connection = false
+let answer = ""
+let datareq = ""
+let req = ""
 playerid = 1
 let testmsg = "tick"
 const ws = new WebSocket("wss://weboscketserver2.onrender.com")
@@ -172,39 +172,30 @@ game.onUpdateInterval(200, function () {
             datareq = "/mmop/player2/x"
             gottenanswer = false
             ws.send(datareq)
-pauseUntil(() => gottenanswer)
-            p2x = parseInt(answer)
-            datareq = "/mmop/player2/y"
+datareq = "/mmop/player2/y"
             gottenanswer = false
             ws.send(datareq)
-pauseUntil(() => gottenanswer)
-            p2y = parseInt(answer)
         } else {
             datareq = "/mmop/player1/x"
             gottenanswer = false
             ws.send(datareq)
-pauseUntil(() => gottenanswer)
-            p2x2 = parseInt(answer)
-            datareq = "/mmop/player1/y"
+datareq = "/mmop/player1/y"
             gottenanswer = false
             ws.send(datareq)
-pauseUntil(() => gottenanswer)
-            p2y2 = parseInt(answer)
         }
     }
     if (answer.charAt(0) == "x") {
         if (playerid == 1) {
-            p2x = parseFloat(answer.substr(1, 2))
+            p2x = parseFloat(answer.substr(1, 5))
         } else {
-            p2x2 = parseFloat(answer.substr(1, 2))
+            p2x2 = parseFloat(answer.substr(1, 5))
         }
         if (answer.charAt(0) == "y") {
             if (playerid == 1) {
-                p2y = parseFloat(answer.substr(1, 2))
+                p2y = parseFloat(answer.substr(1, 5))
             } else {
-                p2y2 = parseFloat(answer.substr(1, 2))
+                p2y2 = parseFloat(answer.substr(1, 5))
             }
         }
     }
-    console.logValue("x", p2x)
 })
