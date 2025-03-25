@@ -46,7 +46,7 @@ control.runInParallel(function () {
         const data = msg.data;
         console.log(`[Recieved] ${data}`)
         answer = `${data}`
-        if (answer.charAt(0) == "x") {
+        if (answer.charAt(1) == "x") {
             console.log("THIS IS IT IT WORKS KINDA")
             if (playerid == 1) {
                 p2x = parseFloat(answer.substr(1, 5))
