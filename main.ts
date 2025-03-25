@@ -178,7 +178,7 @@ game.onUpdate(function () {
         mySprite.setPosition(p2x2, p2y2)
     }
 })
-game.onUpdateInterval(100, function () {
+game.onUpdateInterval(50, function () {
     info.setScore(p2x)
     if (connection) {
         if (playerid == 1) {
