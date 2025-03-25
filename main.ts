@@ -43,7 +43,7 @@ control.runInParallel(function () {
     ws.onmessage = (msg) => {
         gottenanswer = true
         connection = true
-        console.log("connected")
+        //console.log("connected")
         const data = msg.data;
         //console.log(`[Recieved] ${data}`)
         answer = `${data}`
