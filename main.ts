@@ -44,10 +44,10 @@ control.runInParallel(function () {
         connection = true
         console.log("connected")
         const data = msg.data;
-        console.log(`[Recieved] ${data}`)
+        //console.log(`[Recieved] ${data}`)
         answer = `${data}`
         if (answer.charAt(1) == "x") {
-            console.log("THIS IS IT IT WORKS KINDA")
+            //console.log("THIS IS IT IT WORKS KINDA")
             if (playerid == 1) {
                 p2x = parseFloat(answer.substr(2, 5))
             } else {
