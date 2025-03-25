@@ -22,17 +22,17 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 let mySprite2: Sprite = null
 let myhitbox: Sprite = null
 let mySprite: Sprite = null
-let p2y2 = 0
-let p2x2 = 0
-let p2y = 0
-let p2x = 0
-let playerid = 0
-let gottenanswer = false
-let connection = false
-let answer = ''
-let datareq = ""
-let req = ""
 let otherplayercrouch = false
+let req = ""
+let datareq = ""
+let answer = ''
+let connection = false
+let gottenanswer = false
+let playerid = 0
+let p2x = 0
+let p2y = 0
+let p2x2 = 0
+let p2y2 = 0
 playerid = 1
 let testmsg = "tick"
 const ws = new WebSocket("wss://weboscketserver2.onrender.com")
@@ -175,17 +175,6 @@ game.onUpdate(function () {
         scene.cameraFollowSprite(mySprite2)
         myhitbox.setPosition(mySprite2.x, mySprite2.y)
     }
-    if (playerid == 1 && connection) {
-        datareq = "n/mmop/player1/x>" + "x" + mySprite.x
-        ws.send(datareq)
-datareq = "n/mmop/player1/y>" + "y" + mySprite.y
-        ws.send(datareq)
-    } else if (connection && playerid == 2) {
-        datareq = "n/mmop/player2/x>" + "x" + mySprite2.x
-        ws.send(datareq)
-datareq = "n/mmop/player2/y>" + "y" + mySprite2.y
-        ws.send(datareq)
-    }
     if (connection) {
         if (controller.down.isPressed()) {
             if (playerid == 1) {
@@ -252,6 +241,7 @@ datareq = "n/mmop/player2/y>" + "y" + mySprite2.y
                     . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
                     `)
                 datareq = "n/mmop/player2/c>" + "c0"
+                ws.send(datareq)
             } else {
                 mySprite2.setImage(img`
                     . 8 8 8 8 8 8 8 8 8 8 8 8 8 8 . 
@@ -272,6 +262,7 @@ datareq = "n/mmop/player2/y>" + "y" + mySprite2.y
                     . 8 8 8 8 8 8 8 8 8 8 8 8 8 8 . 
                     `)
                 datareq = "n/mmop/player2/c>" + "c0"
+                ws.send(datareq)
             }
         }
     }
@@ -367,11 +358,17 @@ game.onUpdateInterval(50, function () {
 datareq = "/mmop/player2/y"
             gottenanswer = false
             ws.send(datareq)
+datareq = "/mmop/player2/c"
+            gottenanswer = false
+            ws.send(datareq)
         } else {
             datareq = "/mmop/player1/x"
             gottenanswer = false
             ws.send(datareq)
 datareq = "/mmop/player1/y"
+            gottenanswer = false
+            ws.send(datareq)
+datareq = "/mmop/player1/c"
             gottenanswer = false
             ws.send(datareq)
         }
