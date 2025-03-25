@@ -54,7 +54,7 @@ control.runInParallel(function () {
                 p2x2 = parseFloat(answer.substr(1, 5))
             }
         }
-        if (answer.charAt(0) == "y") {
+        if (answer.charAt(1) == "y") {
             if (playerid == 1) {
                 p2y = parseFloat(answer.substr(1, 5))
             } else {
