@@ -1,5 +1,6 @@
 namespace SpriteKind {
     export const hitbox = SpriteKind.create()
+    export const player2 = SpriteKind.create()
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (playerid == 1) {
@@ -21,16 +22,16 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 let mySprite2: Sprite = null
 let myhitbox: Sprite = null
 let mySprite: Sprite = null
-let p2y2 = 0
-let p2x2 = 0
-let p2y = 0
-let p2x = 0
-let playerid = 0
-let gottenanswer = false
-let connection = false
-let answer = ''
-let datareq = ""
 let req = ""
+let datareq = ""
+let answer = ''
+let connection = false
+let gottenanswer = false
+let playerid = 0
+let p2x = 0
+let p2y = 0
+let p2x2 = 0
+let p2y2 = 0
 playerid = 1
 let testmsg = "tick"
 const ws = new WebSocket("wss://weboscketserver2.onrender.com")
@@ -139,9 +140,9 @@ mySprite2 = sprites.create(img`
     8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
     8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
     . 8 8 8 8 8 8 8 8 8 8 8 8 8 8 . 
-    `, SpriteKind.Player)
+    `, SpriteKind.player2)
 scene.cameraFollowSprite(mySprite)
-CollisionHandler.handleSolidCollision(mySprite, SpriteKind.Player)
+CollisionHandler.handleSolidCollision(mySprite, SpriteKind.player2)
 CollisionHandler.handleSolidCollision(mySprite2, SpriteKind.Player)
 game.onUpdate(function () {
     if (playerid == 1) {
