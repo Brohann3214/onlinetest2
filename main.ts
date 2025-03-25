@@ -49,16 +49,16 @@ control.runInParallel(function () {
         if (answer.charAt(1) == "x") {
             console.log("THIS IS IT IT WORKS KINDA")
             if (playerid == 1) {
-                p2x = parseFloat(answer.substr(1, 5))
+                p2x = parseFloat(answer.substr(2, 5))
             } else {
-                p2x2 = parseFloat(answer.substr(1, 5))
+                p2x2 = parseFloat(answer.substr(2, 5))
             }
         }
         if (answer.charAt(1) == "y") {
             if (playerid == 1) {
-                p2y = parseFloat(answer.substr(1, 5))
+                p2y = parseFloat(answer.substr(2, 5))
             } else {
-                p2y2 = parseFloat(answer.substr(1, 5))
+                p2y2 = parseFloat(answer.substr(2, 5))
             }
         }
     }
