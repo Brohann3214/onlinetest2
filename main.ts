@@ -19,19 +19,20 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     playerid = 1
 })
+let otherplayercrouch = false
 let mySprite2: Sprite = null
 let myhitbox: Sprite = null
 let mySprite: Sprite = null
-let p2y2 = 0
-let p2x2 = 0
-let p2y = 0
-let p2x = 0
-let playerid = 0
-let gottenanswer = false
-let connection = false
-let answer = ''
-let datareq = ""
 let req = ""
+let datareq = ""
+let answer = ''
+let connection = false
+let gottenanswer = false
+let playerid = 0
+let p2x = 0
+let p2y = 0
+let p2x2 = 0
+let p2y2 = 0
 playerid = 1
 let testmsg = "tick"
 const ws = new WebSocket("wss://weboscketserver2.onrender.com")
@@ -141,8 +142,14 @@ mySprite2 = sprites.create(img`
     8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
     . 8 8 8 8 8 8 8 8 8 8 8 8 8 8 . 
     `, SpriteKind.player2)
-let otherplayercrouch = false
 scene.cameraFollowSprite(mySprite)
+game.onUpdate(function () {
+    if (playerid == 1) {
+        mySprite2.setPosition(p2x, p2y)
+    } else {
+        mySprite.setPosition(p2x2, p2y2)
+    }
+})
 game.onUpdate(function () {
     if (playerid == 1) {
         myhitbox.setPosition(mySprite.x, mySprite.y)
@@ -339,13 +346,6 @@ datareq = "n/mmop/player2/y>" + "y" + mySprite2.y
         }
     }
 })
-game.onUpdate(function () {
-    if (playerid == 1) {
-        mySprite2.setPosition(p2x, p2y)
-    } else {
-        mySprite.setPosition(p2x2, p2y2)
-    }
-})
 game.onUpdateInterval(50, function () {
     info.setScore(p2x)
     if (connection) {
@@ -356,6 +356,9 @@ game.onUpdateInterval(50, function () {
 datareq = "/mmop/player2/y"
             gottenanswer = false
             ws.send(datareq)
+datareq = "/mmop/player2/c"
+            gottenanswer = false
+            ws.send(datareq)
         } else {
             datareq = "/mmop/player1/x"
             gottenanswer = false
@@ -363,6 +366,16 @@ datareq = "/mmop/player2/y"
 datareq = "/mmop/player1/y"
             gottenanswer = false
             ws.send(datareq)
+datareq = "/mmop/player1/c"
+            gottenanswer = false
+            ws.send(datareq)
+        }
+        if (answer.includes("c")) {
+            if (answer.includes("1")) {
+                otherplayercrouch = true
+            } else if (answer.includes("0")) {
+                otherplayercrouch = false
+            }
         }
     }
 })
