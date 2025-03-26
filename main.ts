@@ -22,17 +22,16 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 let mySprite2: Sprite = null
 let myhitbox: Sprite = null
 let mySprite: Sprite = null
-let otherplayercrouch = false
-let req = ""
-let datareq = ""
-let answer = ''
-let connection = false
-let gottenanswer = false
-let playerid = 0
-let p2x = 0
-let p2y = 0
-let p2x2 = 0
 let p2y2 = 0
+let p2x2 = 0
+let p2y = 0
+let p2x = 0
+let playerid = 0
+let gottenanswer = false
+let connection = false
+let answer = ''
+let datareq = ""
+let req = ""
 playerid = 1
 let testmsg = "tick"
 const ws = new WebSocket("wss://weboscketserver2.onrender.com")
@@ -63,15 +62,7 @@ control.runInParallel(function () {
                 p2y2 = parseFloat(answer.substr(2, 5))
             }
         }
-        if (answer.charAt(1) == "c") {
-            console.log("c is foind yeS!!!")
-            if (answer == "c0"){
-                otherplayercrouch = false
-            } else if (answer == "c1"){
-                otherplayercrouch = true
-            }
-            
-        }
+        
     }
     ws.onopen = () => {
 
@@ -175,178 +166,6 @@ game.onUpdate(function () {
         scene.cameraFollowSprite(mySprite2)
         myhitbox.setPosition(mySprite2.x, mySprite2.y)
     }
-    if (connection) {
-        if (controller.down.isPressed()) {
-            if (playerid == 1) {
-                mySprite.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-                    `)
-                datareq = "n/mmop/player1/c>" + "c1"
-                ws.send(datareq)
-            } else {
-                mySprite2.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . 8 8 8 8 8 8 8 8 8 8 8 8 8 8 . 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    . 8 8 8 8 8 8 8 8 8 8 8 8 8 8 . 
-                    `)
-                datareq = "n/mmop/player2/c>" + "c1"
-                ws.send(datareq)
-            }
-        } else {
-            if (playerid == 1) {
-                mySprite.setImage(img`
-                    . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                    . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-                    `)
-                datareq = "n/mmop/player2/c>" + "c0"
-                ws.send(datareq)
-            } else {
-                mySprite2.setImage(img`
-                    . 8 8 8 8 8 8 8 8 8 8 8 8 8 8 . 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                    . 8 8 8 8 8 8 8 8 8 8 8 8 8 8 . 
-                    `)
-                datareq = "n/mmop/player2/c>" + "c0"
-                ws.send(datareq)
-            }
-        }
-    }
-    if (otherplayercrouch) {
-        if (playerid == 1) {
-            mySprite2.setImage(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . 8 8 8 8 8 8 8 8 8 8 8 8 8 8 . 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                . 8 8 8 8 8 8 8 8 8 8 8 8 8 8 . 
-                `)
-        } else {
-            mySprite.setImage(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-                `)
-        }
-    } else {
-        if (playerid == 1) {
-            mySprite2.setImage(img`
-                . 8 8 8 8 8 8 8 8 8 8 8 8 8 8 . 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                8 6 6 6 6 6 6 6 6 6 6 6 6 6 6 8 
-                . 8 8 8 8 8 8 8 8 8 8 8 8 8 8 . 
-                `)
-        } else {
-            mySprite.setImage(img`
-                . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                2 4 4 4 4 4 4 4 4 4 4 4 4 4 4 2 
-                . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-                `)
-        }
-    }
 })
 game.onUpdateInterval(50, function () {
     info.setScore(p2x)
@@ -358,17 +177,11 @@ game.onUpdateInterval(50, function () {
 datareq = "/mmop/player2/y"
             gottenanswer = false
             ws.send(datareq)
-datareq = "/mmop/player2/c"
-            gottenanswer = false
-            ws.send(datareq)
         } else {
             datareq = "/mmop/player1/x"
             gottenanswer = false
             ws.send(datareq)
 datareq = "/mmop/player1/y"
-            gottenanswer = false
-            ws.send(datareq)
-datareq = "/mmop/player1/c"
             gottenanswer = false
             ws.send(datareq)
         }
